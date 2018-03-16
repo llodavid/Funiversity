@@ -1,0 +1,4 @@
+be\llodavid\domain\CourseRepository.class
+be\llodavid\domain\Professor.class
+be\llodavid\domain\ProfessorRepository.class
+be\llodavid\domain\Course.class
