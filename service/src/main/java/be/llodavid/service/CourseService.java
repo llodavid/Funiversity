@@ -5,6 +5,7 @@ import be.llodavid.domain.CourseRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @Named
 public class CourseService {
@@ -23,5 +24,17 @@ public class CourseService {
     }
     public void addCourse(Course course) {
         courseRepository.addCourse(course);
+    }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.getAllCourses();
+    }
+
+    public Course updateCourse(int courseID, Course course) {
+        return courseRepository.updateCourse(courseID,course);
+    }
+
+    public void removeCourse(int courseID) {
+        courseRepository.deleteCourse(courseID);
     }
 }

@@ -8,9 +8,15 @@ public class ProfessorDTO {
     public int professorID;
     public String firstname, lastname;
 
-    public ProfessorDTO(int professorID, String firstname, String lastname) {
-        this.professorID = professorID;
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public void setProfessorID(int professorID) {
+        this.professorID = professorID;
     }
 }

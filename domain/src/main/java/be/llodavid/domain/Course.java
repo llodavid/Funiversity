@@ -1,7 +1,7 @@
 package be.llodavid.domain;
 
 public class Course {
-    private int courseID, studypoints, professorID, idCounter=0;
+    private int courseID, studypoints, professorID;
     private String name, category;
 
     public Course(String name, String category, int studypoints,  int professorID) {
@@ -9,7 +9,6 @@ public class Course {
         this.professorID = professorID;
         this.name = name;
         this.category = category;
-        this.courseID = idCounter++;
     }
 
     public String getCategory() {
@@ -30,5 +29,9 @@ public class Course {
 
     public int getProfessorID() {
         return professorID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 }

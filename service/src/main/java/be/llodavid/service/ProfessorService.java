@@ -24,11 +24,15 @@ public class ProfessorService {
         professorRepository.removeProfessor(professorID);
     }
 
-    public void addProfessor(Professor professor) {
-        professorRepository.addProfessor(professor);
+    public Professor addProfessor(Professor professor) {
+        return professorRepository.addProfessor(professor);
     }
 
     public List<Professor> getAllProfessors() {
         return professorRepository.getAllProfessors();
+    }
+
+    public Professor updateProfessor(int professorID, Professor professor) {
+        return professorRepository.updateProfessor(professorID, professor);
     }
 }

@@ -2,15 +2,11 @@ package be.llodavid.api.ProfessorAPI;
 
 import be.llodavid.domain.Professor;
 import be.llodavid.service.ProfessorService;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,9 +30,15 @@ public class ProfessorController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public ProfessorDTO createProfessor(@RequestBody ProfessorDTO professorDTO) {
+        Professor createdProfessor = professorService.addProfessor(professorMapper.createProfessor(professorDTO));
+        return professorMapper.createProfessorDTO(createdProfessor);
+    }
 
-        professorService.addProfessor(professorMapper.createProfessor(professorDTO));
-        return professorDTO;
+    @PutMapping(path = "/{professorID}", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProfessorDTO updateProfessor(@PathVariable int professorID, @RequestBody ProfessorDTO professorDTO) {
+        Professor updatedProfessor = professorService.updateProfessor(professorID, professorMapper.createProfessor(professorDTO));
+        return professorMapper.createProfessorDTO(updatedProfessor);
     }
 
     @GetMapping(produces = "application/json")
@@ -45,5 +47,11 @@ public class ProfessorController {
         return professorService.getAllProfessors().stream()
                 .map(professor -> professorMapper.createProfessorDTO(professor))
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping(path = "/{professorID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProfessor(@PathVariable Integer professorID) {
+        professorService.removeProfessor(professorID);
     }
 }

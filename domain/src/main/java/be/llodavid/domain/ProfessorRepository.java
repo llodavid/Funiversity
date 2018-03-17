@@ -7,13 +7,13 @@ import java.util.*;
 @Named
 public class ProfessorRepository {
     private Map<Integer,Professor> professors;
+    private static int idCounter=0;
 
     public ProfessorRepository() {
-        professors = new ImmutableMap.Builder<Integer, Professor>()
-                .put(0,new Professor("John","Doe"))
-                .put(1, new Professor("Jane", "Doe"))
-                .put(2, new Professor("Hubert", "Farnsworth"))
-                .build();
+        professors = new HashMap<Integer, Professor>();
+        addProfessor(new Professor("John","Doe"));
+        addProfessor(new Professor("Jane", "Doe"));
+        addProfessor(new Professor("Hubert", "Farnsworth"));
     }
     public Professor getProfessor(int professorID) {
         return professors.get(professorID);
@@ -21,11 +21,23 @@ public class ProfessorRepository {
     public void removeProfessor(int professorID) {
         professors.remove(professorID);
     }
-    public void addProfessor(Professor professor) {
-        professors.put(professor.getProfessorID(),professor);
+    public Professor addProfessor(Professor professor) {
+        professor.setProfessorID(idCounter);
+        professors.put(idCounter,professor);
+        idCounter++;
+        return professor;
     }
 
     public List<Professor> getAllProfessors() {
         return Collections.unmodifiableList(new ArrayList<Professor>(professors.values()));
+    }
+
+    public Professor updateProfessor(int professorID, Professor professor) {
+        if (professors.containsKey(professorID)) {
+            professors.put(professorID,professor);
+        } else {
+            throw new IllegalArgumentException("No such professor in the database");
+        }
+        return professor;
     }
 }
