@@ -18,7 +18,7 @@ public class CourseController {
     private ProfessorService professorService;
 
     @Inject
-    public CourseController(CourseService courseService, CourseMapper courseMapper, ProfessorService professorService) {
+    public CourseController(CourseService courseService, CourseMapper courseMapper) {
         this.courseService = courseService;
         this.courseMapper = courseMapper;
         this.professorService = professorService;
@@ -29,8 +29,7 @@ public class CourseController {
     public CourseDTO getCourse(@PathVariable int courseID) {
         Course course = courseService.getCourse(courseID);
         return courseMapper.createCourseDTO(
-                courseService.getCourse(courseID),
-                professorService.getProfessor(course.getProfessorID()));
+                courseService.getCourse(courseID));
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
@@ -44,8 +43,7 @@ public class CourseController {
     @ResponseStatus(HttpStatus.CREATED)
     public CourseDTO updateCourse(@PathVariable int courseID, @RequestBody CourseDTO courseDTO) {
         Course updatedCourse = courseService.updateCourse(courseID, courseMapper.createCourse(courseDTO));
-        return courseMapper.createCourseDTO(updatedCourse,
-                        professorService.getProfessor(updatedCourse.getProfessorID()));
+        return courseMapper.createCourseDTO(updatedCourse);
     }
 
     @GetMapping(produces = "application/json")
@@ -53,9 +51,7 @@ public class CourseController {
     public List<CourseDTO> getAllCourses() {
         return courseService.getAllCourses().stream()
                 .map(course -> courseMapper
-                        .createCourseDTO(
-                                course,
-                                professorService.getProfessor(course.getProfessorID())))
+                        .createCourseDTO(course))
                 .collect(Collectors.toList());
     }
 

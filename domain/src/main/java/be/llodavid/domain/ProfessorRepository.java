@@ -34,6 +34,7 @@ public class ProfessorRepository {
 
     public Professor updateProfessor(int professorID, Professor professor) {
         if (professors.containsKey(professorID)) {
+            professor.setProfessorID(professorID);
             professors.put(professorID,professor);
         } else {
             throw new IllegalArgumentException("No such professor in the database");

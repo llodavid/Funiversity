@@ -21,7 +21,7 @@ public class Professor {
         return lastname;
     }
 
-    void setProfessorID(int professorID) {
+    public void setProfessorID(int professorID) {
         this.professorID = professorID;
     }
     public boolean hasID() {

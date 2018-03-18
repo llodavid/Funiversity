@@ -36,6 +36,7 @@ public class CourseRepository {
 
     public Course updateCourse(int courseID, Course course) {
         if(courses.containsKey(courseID)) {
+            course.setCourseID(courseID);
             courses.put(courseID,course);
         }
         else {
