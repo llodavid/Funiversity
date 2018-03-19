@@ -51,7 +51,7 @@ public class ProfessorController {
 
     @DeleteMapping(path = "/{professorID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProfessor(@PathVariable Integer professorID) {
+    public void deleteProfessor(@PathVariable int professorID) {
         professorService.removeProfessor(professorID);
     }
 }

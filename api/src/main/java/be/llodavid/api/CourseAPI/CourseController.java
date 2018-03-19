@@ -55,9 +55,9 @@ public class CourseController {
                 .collect(Collectors.toList());
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/{courseID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCourse(@PathVariable Integer courseID) {
+    public void deleteCourse(@PathVariable int courseID) {
         courseService.removeCourse(courseID);
     }
 
